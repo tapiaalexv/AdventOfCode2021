@@ -20,8 +20,8 @@ public class Reto3 {
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
-        int temp =0;
-        while(temp != lista.get(0).length()){
+        int temp = 0;
+        while (temp != lista.get(0).length()) {
             int cero = 0, uno = 0;
             for (String s : lista) {
                 if (s.charAt(temp) == '0') {
@@ -46,7 +46,7 @@ public class Reto3 {
         System.out.println("*** RETO 3 ***\nGamma = " + decimalGamma + "\nEpsilon = " +
                 decimalEpsilon + "\nRespuesta 1er parte-> " + decimalGamma * decimalEpsilon);
 
-        ArrayList<String> oxygen =  (ArrayList<String>) lista.clone();
+        ArrayList<String> oxygen = (ArrayList<String>) lista.clone();
         ArrayList<String> co2 = (ArrayList<String>) lista.clone();
 
         int index = 0;
@@ -60,9 +60,9 @@ public class Reto3 {
                 }
             }
             if (cero > uno) {
-                oxygen = calcularOxygen(oxygen, '1',index);
+                oxygen = calcularOxygen(oxygen, '1', index);
             } else if (uno >= cero) {
-                oxygen = calcularOxygen(oxygen,'0',index);
+                oxygen = calcularOxygen(oxygen, '0', index);
             }
             index++;
         }
@@ -77,10 +77,10 @@ public class Reto3 {
                     uno++;
                 }
             }
-            if (uno>=cero) {
-                co2 = calcularCo2(co2,'1',index2);
-            } else if (cero>uno) {
-                co2 = calcularCo2(co2,'0',index2);
+            if (uno >= cero) {
+                co2 = calcularCo2(co2, '1', index2);
+            } else if (cero > uno) {
+                co2 = calcularCo2(co2, '0', index2);
             }
             index2++;
         }
@@ -88,7 +88,7 @@ public class Reto3 {
         long decimalOxygen = binarioADecimal(Long.parseLong(oxygen.get(0)));
         long decimalc02 = binarioADecimal(Long.parseLong(co2.get(0)));
 
-        System.out.println("\nOxygen = "+decimalOxygen+"\nCO2 = " +decimalc02+
+        System.out.println("\nOxygen = " + decimalOxygen + "\nCO2 = " + decimalc02 +
                 "\nRespuesta 2da parte-> " + decimalOxygen * decimalc02);
     }
 
@@ -105,53 +105,24 @@ public class Reto3 {
         }
         return decimal;
     }
+
     public static ArrayList<String> calcularOxygen(ArrayList<String> list, char condicion, int index) {
         ArrayList<String> lista2 = new ArrayList<>();
-        for(int i = 0; i<list.size();i++){
-            if(list.get(i).charAt(index) != condicion){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).charAt(index) != condicion) {
                 lista2.add(list.get(i));
             }
         }
         return lista2;
     }
+
     public static ArrayList<String> calcularCo2(ArrayList<String> list, char condicion, int index) {
         ArrayList<String> lista2 = new ArrayList<>();
-        for(int i = 0; i<list.size();i++){
-            if(list.get(i).charAt(index) != condicion){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).charAt(index) != condicion) {
                 lista2.add(list.get(i));
             }
         }
         return lista2;
     }
 }
-
-/*Otra forma de resolver parte1
-int filas = lista.size();
-        int columnas = lista.get(0).length();
-
-        matriz = new String[filas][columnas];
-
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                matriz[i][j] = String.valueOf(lista.get(i).charAt(j));
-            }
-        }
-
-        for (int i = 0; i < columnas; i++) {
-            int cero = 0, uno = 0;
-            for (int j = 0; j < filas; j++) {
-                if (matriz[j][i].equals("0")) {
-                    cero++;
-                } else {
-                    uno++;
-                }
-            }
-            if (cero > uno) {
-                gamma += "0";
-                epsilon += "1";
-            } else {
-                gamma += "1";
-                epsilon += "0";
-            }
-        }
-* */
