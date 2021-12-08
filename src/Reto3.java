@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Reto3 {
     public static void main(String[] args) {
         ArrayList<String> lista = new ArrayList<>();
-        String[][] matriz;
         String gamma = "", epsilon = "";
 
         FileReader fr = null;
