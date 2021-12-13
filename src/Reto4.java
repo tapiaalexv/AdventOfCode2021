@@ -9,7 +9,7 @@ public class Reto4 {
         BufferedReader br;
 
         try {
-            fr = new FileReader("dia4.txt");
+            fr = new FileReader("test.txt");
             br = new BufferedReader(fr);
             String linea = br.readLine();
             String[] tokens = linea.split(",");
@@ -149,6 +149,85 @@ public class Reto4 {
                 flag2 = 0;
             }
 
+        }
+
+        int ultNum2 = 0;
+        for (int num : numeros) {
+            ultNum2 = num;
+            for (int[][] cart : cartillas2) {
+                for (int fil = 0; fil < 5; fil++) {
+                    for (int col = 0; col < 5; col++) {
+                        if (cart[fil][col] == num) {
+                            cart[fil][col] = -1;
+                        }
+                    }
+                }
+            }
+
+            boolean bingo = false;
+            int[][] ganador = null;
+            long suma = 0;
+            for (int[][] cart : cartillas) {
+                for (int fil = 0; fil < 5; fil++) {
+                    bingo = true;
+                    for (int col = 0; col < 5; col++) {
+                        if (cart[fil][col] != -1) {
+                            bingo = false;
+                            break;
+                        }
+                    }
+                    if (bingo) {
+                        ganador = cart;
+                        break;
+                    }
+                }
+                if (bingo)
+                    break;
+            }
+
+            if (bingo) {
+                for (int f = 0; f < 5; f++) {
+                    for (int c = 0; c < 5; c++) {
+                        if(ganador[f][c] != -1){
+                            suma += ganador[f][c];
+                        }
+                    }
+                }
+                System.out.println("Num Ganador -> "+ultNum2 + " - Sum Cartón -> " + suma);
+                System.out.println("PARTE 1 --> "+ultNum2*suma);
+                break;
+            }
+
+            for (int[][] cart : cartillas2) {
+                for (int fil = 0; fil < 5; fil++) {
+                    bingo = true;
+                    for (int col = 0; col < 5; col++) {
+                        if (cart[col][fil] != -1) {
+                            bingo = false;
+                            break;
+                        }
+                    }
+                    if (bingo) {
+                        ganador = cart;
+                        break;
+                    }
+                }
+                if (bingo)
+                    break;
+            }
+
+            if (bingo) {
+                for (int f = 0; f < 5; f++) {
+                    for (int c = 0; c < 5; c++) {
+                        if(ganador[f][c] != -1){
+                            suma += ganador[f][c];
+                        }
+                    }
+                }
+                System.out.println("Num Ganador -> "+ultNum2 + " - Sum Cartón -> " + suma);
+                System.out.println("PARTE 1 --> "+ultNum2*suma);
+                break;
+            }
         }
 
     }
