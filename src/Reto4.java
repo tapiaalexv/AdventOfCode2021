@@ -9,7 +9,7 @@ public class Reto4 {
         BufferedReader br;
 
         try {
-            fr = new FileReader("test.txt");
+            fr = new FileReader("dia4.txt");
             br = new BufferedReader(fr);
             String linea = br.readLine();
             String[] tokens = linea.split(",");
@@ -26,8 +26,8 @@ public class Reto4 {
             e.printStackTrace(System.out);
         }
 
+        /***  PARTE UNO ***/
         ArrayList<int[][]> cartillas = new ArrayList<int[][]>();
-        ArrayList<int[][]> cartillasCC = new ArrayList<int[][]>();
 
         int[][] aux = new int[5][5];
         int flag = 0;
@@ -42,19 +42,17 @@ public class Reto4 {
             flag++;
             if (flag == 5) {
                 cartillas.add(aux);
-                cartillasCC.add(aux);
                 aux = new int[5][5];
                 fila = 0;
                 flag = 0;
             }
 
         }
-
+        System.out.println("*** RETO 3 ***");
         int ultNum = 0;
-
         for (int num : numeros) {
             ultNum = num;
-            for (int[][] cart : cartillasCC) {
+            for (int[][] cart : cartillas) {
                 for (int fil = 0; fil < 5; fil++) {
                     for (int col = 0; col < 5; col++) {
                         if (cart[fil][col] == num) {
@@ -64,9 +62,10 @@ public class Reto4 {
                 }
             }
 
-            boolean bingo = true;
-            int[][] ganador;
-            for (int[][] cart : cartillasCC) {
+            boolean bingo = false;
+            int[][] ganador = null;
+            long suma = 0;
+            for (int[][] cart : cartillas) {
                 for (int fil = 0; fil < 5; fil++) {
                     bingo = true;
                     for (int col = 0; col < 5; col++) {
@@ -84,23 +83,73 @@ public class Reto4 {
                     break;
             }
 
-            if(bingo){
-                System.out.println(ultNum+"---");
+            if (bingo) {
+                for (int f = 0; f < 5; f++) {
+                    for (int c = 0; c < 5; c++) {
+                        if(ganador[f][c] != -1){
+                            suma += ganador[f][c];
+                        }
+                    }
+                }
+                System.out.println("Num Ganador -> "+ultNum + " - Sum Cartón -> " + suma);
+                System.out.println("PARTE 1 --> "+ultNum*suma);
+                break;
+            }
+
+            for (int[][] cart : cartillas) {
+                for (int fil = 0; fil < 5; fil++) {
+                    bingo = true;
+                    for (int col = 0; col < 5; col++) {
+                        if (cart[col][fil] != -1) {
+                            bingo = false;
+                            break;
+                        }
+                    }
+                    if (bingo) {
+                        ganador = cart;
+                        break;
+                    }
+                }
+                if (bingo)
+                    break;
+            }
+
+            if (bingo) {
+                for (int f = 0; f < 5; f++) {
+                    for (int c = 0; c < 5; c++) {
+                        if(ganador[f][c] != -1){
+                            suma += ganador[f][c];
+                        }
+                    }
+                }
+                System.out.println("Num Ganador -> "+ultNum + " - Sum Cartón -> " + suma);
+                System.out.println("PARTE 1 --> "+ultNum*suma);
                 break;
             }
         }
-        /*for (int j = 0; j < cartillas.size(); j++) {
-            for (int fil = 0; fil < 5; fil++) {
-                for (int i = 0; i<1 ;i++) {
-                }
-                for (int col = 0; col < 5; col++) {
-                    if (cartillas.get(j)[fil][col] == numeros.get(i)) {
 
-                    }
-                }
+        /***  PARTE DOS ***/
+        ArrayList<int[][]> cartillas2 = new ArrayList<int[][]>();
+
+        int[][] aux2 = new int[5][5];
+        int flag2 = 0;
+        int fila2 = 0;
+        for (String s : auxCartillas) {
+            String cad = s.trim();
+            String[] tokens = cad.split("\s{1,}");
+            for (int col = 0; col < tokens.length; col++) {
+                aux2[fila2][col] = Integer.parseInt(tokens[col]);
             }
-        }*/
+            fila2++;
+            flag2++;
+            if (flag2 == 5) {
+                cartillas2.add(aux2);
+                aux2 = new int[5][5];
+                fila2 = 0;
+                flag2 = 0;
+            }
 
+        }
 
     }
 }
